@@ -34,4 +34,8 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL); // Connect Mongo DB with connection string
 mongoose.connection.on('error', (error: Error) => console.log(error)); // Use call back here, If error comes it will display on console
 
-app.use('/', router());
+// app.use('/', router());
+
+app.get('/',(req,res)=>{
+  res.send("Hello world..")
+})

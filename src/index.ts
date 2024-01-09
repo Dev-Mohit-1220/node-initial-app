@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(3000, () => {
-  console.log("Server running at port 3000");
+server.listen(process.env.PORT || 8080, () => {
+  console.log("Server running at port 8080");
 });
 
 // Mongo DB Connection string

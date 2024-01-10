@@ -4,10 +4,10 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
-import mongoose from "mongoose";
-import router from "./router";
 
-const dotenv = require('dotenv');
+import router from "./router";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 const app = express();
 dotenv.config();
@@ -23,19 +23,14 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(process.env.PORT || 8080, () => {
-  console.log("Server running at port 8080");
+server.listen(8080, () => {
+  console.log("Server running on http://localhost:8080/");
 });
 
-// Mongo DB Connection string
-const MONGO_URL = process.env.ConnectionString;
+const MONGO_URL = process.env.MONGO_URL; // DB URI
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL); // Connect Mongo DB with connection string
-mongoose.connection.on('error', (error: Error) => console.log(error)); // Use call back here, If error comes it will display on console
+mongoose.connect(MONGO_URL);
+mongoose.connection.on("error", (error: Error) => console.log(error));
 
-// app.use('/', router());
-
-app.get('/',(req,res)=>{
-  res.send("Hello world..")
-})
+app.use("/", router());
